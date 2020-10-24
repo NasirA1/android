@@ -10,6 +10,7 @@ import com.example.dagger2tut._4_runtimeinject.DaggerCoffeeComponent
 import com.example.dagger2tut._4_runtimeinject.DaggerTeaComponent
 import com.example.dagger2tut._4_runtimeinject.TeaModule
 import com.example.dagger2tut._2_thirdpartylibs.DaggerCar2Component
+import com.example.dagger2tut._5_singleton.di.DaggerBusinessLogicComponent
 import javax.inject.Inject
 
 
@@ -54,6 +55,16 @@ class MainActivity : AppCompatActivity() {
                 .createNewCoffee()
             Log.d(AppConfig.TAG, "coffee created: $coffee")
         }
+
+        //singleton injection
+        //should both use the same ui and db objects as they are annotated @Singleton
+        val businessLogicComponent = DaggerBusinessLogicComponent.create()
+        val businessLogic = businessLogicComponent.createNewBusinessLogic()
+        Log.d(AppConfig.TAG, ".\nonCreate: businessLogic1=${businessLogic.hashCode()}")
+        businessLogic.doSomething()
+        val businessLogic2 = businessLogicComponent.createNewBusinessLogic()
+        Log.d(AppConfig.TAG, ".\nonCreate: businessLogic2=${businessLogic2.hashCode()}")
+        businessLogic2.doSomething()
 
     }
 }
