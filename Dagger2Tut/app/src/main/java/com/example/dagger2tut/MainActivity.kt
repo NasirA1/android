@@ -3,13 +3,13 @@ package com.example.dagger2tut
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.dagger2tut.basics.Car
-import com.example.dagger2tut.basics.DaggerCarComponent
-import com.example.dagger2tut.interfaceinject.DaggerCar3Component
-import com.example.dagger2tut.runtimeinject.DaggerCoffeeComponent
-import com.example.dagger2tut.runtimeinject.DaggerTeaComponent
-import com.example.dagger2tut.runtimeinject.TeaModule
-import com.example.dagger2tut.thirdpartylibs.DaggerCar2Component
+import com.example.dagger2tut._1_basics.Car
+import com.example.dagger2tut._1_basics.DaggerCarComponent
+import com.example.dagger2tut._3_interfaceinject.DaggerCar3Component
+import com.example.dagger2tut._4_runtimeinject.DaggerCoffeeComponent
+import com.example.dagger2tut._4_runtimeinject.DaggerTeaComponent
+import com.example.dagger2tut._4_runtimeinject.TeaModule
+import com.example.dagger2tut._2_thirdpartylibs.DaggerCar2Component
 import javax.inject.Inject
 
 

@@ -1,4 +1,4 @@
-package com.example.dagger2tut.basics
+package com.example.dagger2tut._1_basics
 
 import com.example.dagger2tut.MainActivity
 import dagger.Component

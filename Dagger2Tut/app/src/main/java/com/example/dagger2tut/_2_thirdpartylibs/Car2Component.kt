@@ -1,4 +1,4 @@
-package com.example.dagger2tut.thirdpartylibs
+package com.example.dagger2tut._2_thirdpartylibs
 
 import dagger.Component
 

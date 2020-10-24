@@ -1,4 +1,4 @@
-package com.example.dagger2tut.interfaceinject
+package com.example.dagger2tut._3_interfaceinject
 
 import dagger.Component
 
