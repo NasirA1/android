@@ -25,6 +25,7 @@ class Engine2 @Inject constructor() {
 
 }
 
+//suppose this is a third party class and we cannot modify its constructor to allow it to be injected via Dagger
 class ThirdPartyWheels {
     fun rotate() {
         Log.d(TAG, "rotate: ThirdPartyWheels rotating..")
