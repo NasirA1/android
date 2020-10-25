@@ -3,10 +3,15 @@ package com.example.dagger2tut2.ui.auth
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.RequestManager
 import com.example.dagger2tut2.Constants
 import com.example.dagger2tut2.R
+import com.example.dagger2tut2.model.User
 import com.example.dagger2tut2.vm.ViewModelProviderFactory
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.auth_activity.*
@@ -23,12 +28,39 @@ class AuthActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.auth_activity)
-        Log.d(TAG, "onCreate: AuthActivity loading..")
 
+        login_button.setOnClickListener { attemptLogin() }
+
+        Log.d(TAG, "onCreate: AuthActivity loading..")
         viewModel = ViewModelProviders.of(this, vmProviderFactory).get(AuthViewModel::class.java)
-        //viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
+        //viewModel = ViewModelProvider(this).get(AuthViewModel::class.java) //new 2020 way!
+
+        viewModel.observeAuthState().observe(this, Observer { onUserAuthentication(it) })
 
         setLogo()
+    }
+
+    private fun onUserAuthentication(authResource: AuthResource<User>) {
+        Log.d(TAG, "onUserAuthentication: $authResource")
+        when(authResource.status) {
+            AuthResource.AuthStatus.LOADING -> progress_bar.visibility = View.VISIBLE
+            AuthResource.AuthStatus.AUTHENTICATED -> {
+                progress_bar.visibility = View.GONE
+                Log.d(TAG, "onUserAuthentication: LOGIN SUCCESS - ${authResource.data?.email}")
+            }
+            AuthResource.AuthStatus.NOT_AUTHENTICATED -> progress_bar.visibility = View.GONE
+            AuthResource.AuthStatus.ERROR -> {
+                Log.e(TAG, "onUserAuthentication: ERROR - ${authResource.message}")
+                Toast.makeText(this, "Login failed!", Toast.LENGTH_SHORT).show()
+                progress_bar.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun attemptLogin() {
+        val userId = user_id_input.text.toString().trim()
+        if(userId.isEmpty()) return
+        viewModel.authenticateWithId(userId.toInt())
     }
 
     private fun setLogo() {
