@@ -1,5 +1,6 @@
 package com.example.dagger2tut2.ui.auth
 
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import com.bumptech.glide.RequestManager
 import com.example.dagger2tut2.Constants
 import com.example.dagger2tut2.R
 import com.example.dagger2tut2.model.User
+import com.example.dagger2tut2.ui.main.MainActivity
 import com.example.dagger2tut2.vm.ViewModelProviderFactory
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.auth_activity.*
@@ -47,6 +49,7 @@ class AuthActivity : DaggerAppCompatActivity() {
             AuthResource.AuthStatus.AUTHENTICATED -> {
                 progress_bar.visibility = View.GONE
                 Log.d(TAG, "onUserAuthentication: LOGIN SUCCESS - ${authResource.data?.email}")
+                onLoginSuccess()
             }
             AuthResource.AuthStatus.NOT_AUTHENTICATED -> progress_bar.visibility = View.GONE
             AuthResource.AuthStatus.ERROR -> {
@@ -61,6 +64,13 @@ class AuthActivity : DaggerAppCompatActivity() {
         val userId = user_id_input.text.toString().trim()
         if(userId.isEmpty()) return
         viewModel.authenticateWithId(userId.toInt())
+    }
+
+    private fun onLoginSuccess() {
+        Intent(this, MainActivity::class.java).apply {
+            startActivity(this)
+            finish()
+        }
     }
 
     private fun setLogo() {
