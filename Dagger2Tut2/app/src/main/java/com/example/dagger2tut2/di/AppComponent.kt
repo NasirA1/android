@@ -2,6 +2,7 @@ package com.example.dagger2tut2.di
 
 import android.app.Application
 import com.example.dagger2tut2.BaseApplication
+import com.example.dagger2tut2.di.auth.AuthModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Provides
@@ -14,8 +15,8 @@ import javax.inject.Singleton
     AndroidSupportInjectionModule::class,
     ActivityBuildersModule::class,
     AppModule::class,
-    ViewModelFactoryModule::class
-
+    ViewModelFactoryModule::class,
+    AuthModule::class
 ])
 interface AppComponent : AndroidInjector<BaseApplication> {
 

@@ -1,5 +1,5 @@
 package com.example.dagger2tut2
 
-object AppConfig {
+object Constants {
     const val TAG = "Dagger2Tut2"
 }

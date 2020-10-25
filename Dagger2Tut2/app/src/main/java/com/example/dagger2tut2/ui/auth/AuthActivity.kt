@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.RequestManager
-import com.example.dagger2tut2.AppConfig
+import com.example.dagger2tut2.Constants
 import com.example.dagger2tut2.R
 import com.example.dagger2tut2.vm.ViewModelProviderFactory
 import dagger.android.support.DaggerAppCompatActivity
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class AuthActivity : DaggerAppCompatActivity() {
 
-    companion object { const val TAG = AppConfig.TAG }
+    companion object { const val TAG = Constants.TAG }
     @Inject lateinit var logo: Drawable
     @Inject lateinit var requestManager: RequestManager
     @Inject lateinit var vmProviderFactory: ViewModelProviderFactory
