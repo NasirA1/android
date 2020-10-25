@@ -6,7 +6,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.example.dagger2tut2.R
-import com.example.dagger2tut2.di.network.auth.AuthApi.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -41,7 +40,7 @@ class AppModule {
     @Provides
     fun provideRetrofitInstance(): Retrofit =
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl("")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 }
