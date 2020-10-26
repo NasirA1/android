@@ -135,3 +135,6 @@ class SomeInterfaceModule {
     fun provideSomeInterface2(): SomeInterface =
             SomeInterfaceImpl2()
 }
+
+// Predefined qualifiers for App and Activity contexts respectively:
+// @ApplicationContext and @ActivityContext
