@@ -1,9 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    android:padding="15dp"
+    android:background="#fff"
+    tools:context=".ui.MainActivity"
+    android:id="@+id/container"
+    >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/imageview_logo"
+        android:layout_marginBottom="30dp"
+        android:layout_above="@+id/textview_activity"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview_activity"
+        tools:text="Activity details here"
+        android:gravity="center_horizontal"
+        android:layout_centerInParent="true" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_centerInParent="true"
+        android:id="@+id/progress_bar"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/textview_activity"
+        android:elevation="20dp"/>
+
+</RelativeLayout>
