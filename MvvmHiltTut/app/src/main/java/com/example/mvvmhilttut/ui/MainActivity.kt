@@ -17,6 +17,7 @@ import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 
@@ -28,6 +29,9 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var gson: Gson
+
+    @Inject
+    lateinit var someInterfaceClient: SomeInterfaceClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +45,9 @@ class MainActivity : AppCompatActivity() {
             )
         )
         Log.d(Constants.TAG, "onCreate: json:\n$json")
+
+
+        Log.d(Constants.TAG, "onCreate: ${someInterfaceClient.callSomeInterfaces()}")
     }
 }
 
@@ -55,16 +62,16 @@ class MyDatabase @Inject constructor() : Database {
     }
 }
 
-@InstallIn(ActivityComponent::class)
 @Module
+@InstallIn(ActivityComponent::class)
 abstract class MyModule {
     @ActivityScoped
     @Binds
     abstract fun bindMyDatabase(db: MyDatabase): Database
 }
 
-@InstallIn(ApplicationComponent::class)
 @Module
+@InstallIn(ApplicationComponent::class)
 class MyGlobalModule {
     @Singleton
     @Provides
@@ -72,12 +79,59 @@ class MyGlobalModule {
         GsonBuilder().setPrettyPrinting().create()
 }
 
+
 //Hilt supports different scopes
 /**
- @Singleton                         Application
- @ActivityRetainedScope             ViewModel
- @ActivityScoped                    Activity
- @FragmentScoped                    Fragment
- @ViewScoped                        View
- @ServiceScoped                     ServiceScoped
-*/
+@Singleton                         Application
+@ActivityRetainedScope             ViewModel
+@ActivityScoped                    Activity
+@FragmentScoped                    Fragment
+@ViewScoped                        View
+@ServiceScoped                     ServiceScoped
+ */
+
+
+//Providing instances of the same type
+interface SomeInterface {
+    fun doSomething(): String
+}
+class SomeInterfaceImpl1 @Inject constructor(): SomeInterface {
+    override fun doSomething(): String {
+        return "SomeInterfaceImpl1 doSomething"
+    }
+}
+class SomeInterfaceImpl2 @Inject constructor(): SomeInterface {
+    override fun doSomething(): String {
+        return "SomeInterfaceImpl2 doSomething"
+    }
+}
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class Impl1
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class Impl2
+
+class SomeInterfaceClient @Inject constructor(
+        @Impl1 private val someInterface1: SomeInterface,
+        @Impl2 private val someInterface2: SomeInterface
+){
+    fun callSomeInterfaces(): String {
+        return "\n" + someInterface1.doSomething() + "\n" + someInterface2.doSomething()
+    }
+}
+
+@Module
+@InstallIn(ApplicationComponent::class)
+class SomeInterfaceModule {
+    @Provides
+    @Impl1
+    fun provideSomeInterface1(): SomeInterface =
+            SomeInterfaceImpl1()
+    @Impl2
+    @Provides
+    fun provideSomeInterface2(): SomeInterface =
+            SomeInterfaceImpl2()
+}
