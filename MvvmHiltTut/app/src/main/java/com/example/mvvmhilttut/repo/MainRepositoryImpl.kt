@@ -1,11 +1,13 @@
 package com.example.mvvmhilttut.repo
 
+import androidx.lifecycle.LiveData
 import com.example.mvvmhilttut.api.ApiActivityMapper
 import com.example.mvvmhilttut.api.BoredApiClient
 import com.example.mvvmhilttut.model.ActivityModel
 import com.example.mvvmhilttut.room.ActivityDao
 import com.example.mvvmhilttut.room.CacheActivityMapper
 import com.example.mvvmhilttut.util.DataState
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -20,7 +22,6 @@ class MainRepositoryImpl @Inject constructor(
 
     override suspend fun getActivity(): Flow<DataState<List<ActivityModel>>> = flow {
         emit(DataState.Loading)
-        delay(1000)
         try {
             val activityEntity = boredApiClient.getRandomActivity()
             val activityModel = apiMapper.mapFromEntity(activityEntity)
@@ -32,4 +33,13 @@ class MainRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun purgeCache(): Flow<DataState<Unit>> = flow {
+        emit(DataState.Loading)
+        try {
+            activityDao.purge()
+            emit(DataState.Success(Unit))
+        } catch (ex: Throwable) {
+            emit(DataState.Error(ex))
+        }
+    }
 }

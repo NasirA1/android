@@ -14,4 +14,6 @@ interface ActivityDao {
     @Query("SELECT * FROM activities")
     suspend fun getAllActivities(): List<ActivityCacheEntity>
 
+    @Query("DELETE FROM activities")
+    suspend fun purge()
 }

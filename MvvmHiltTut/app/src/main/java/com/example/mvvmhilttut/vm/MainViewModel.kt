@@ -19,8 +19,10 @@ class MainViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     private val _dataState = MutableLiveData<DataState<List<ActivityModel>>>()
+    private val _purgeState = MutableLiveData<DataState<Unit>>()
 
     val dataState: LiveData<DataState<List<ActivityModel>>> = _dataState
+    val purgeState: LiveData<DataState<Unit>> = _purgeState
 
     fun setStateEvent(mainStateEvent: MainStateEvent) {
         viewModelScope.launch {
@@ -28,6 +30,11 @@ class MainViewModel @ViewModelInject constructor(
                 is MainStateEvent.GetActivityEvents -> {
                     mainRepository.getActivity().onEach { dataState ->
                         _dataState.value = dataState
+                    }.launchIn(viewModelScope)
+                }
+                is MainStateEvent.PurgeCache -> {
+                    mainRepository.purgeCache().onEach { purgeState ->
+                        _purgeState.value = purgeState
                     }.launchIn(viewModelScope)
                 }
                 is MainStateEvent.None -> {
@@ -41,8 +48,8 @@ class MainViewModel @ViewModelInject constructor(
 
 sealed class MainStateEvent {
 
-    object GetActivityEvents: MainStateEvent()
-
     object None: MainStateEvent()
+    object GetActivityEvents: MainStateEvent()
+    object PurgeCache: MainStateEvent()
 
 }
