@@ -3,8 +3,8 @@ package com.example.mvvmhilttut.api
 
 // http://www.boredapi.com/api/activity
 
-data class BoredApiActivity(
-    val accessibility: Int,
+data class ActivityEntity(
+    val accessibility: Double,
     val activity: String,
     val key: String,
     val link: String,

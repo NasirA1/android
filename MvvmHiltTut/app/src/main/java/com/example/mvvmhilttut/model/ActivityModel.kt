@@ -1,8 +1,9 @@
 package com.example.mvvmhilttut.model
 
 
-data class ActivityEntity(
-    val accessibility: Int,
+data class ActivityModel(
+    val id: Int =0,
+    val accessibility: Double,
     val activity: String,
     val participants: Int,
     val price: Double,
