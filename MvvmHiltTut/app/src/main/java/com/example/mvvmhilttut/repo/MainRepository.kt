@@ -1,6 +1,5 @@
 package com.example.mvvmhilttut.repo
 
-import androidx.lifecycle.LiveData
 import com.example.mvvmhilttut.model.ActivityModel
 import com.example.mvvmhilttut.util.DataState
 import kotlinx.coroutines.flow.Flow
