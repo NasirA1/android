@@ -1,15 +1,10 @@
 package com.example.myquiz.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.example.myquiz.MyApplication_HiltComponents
+import androidx.appcompat.app.AppCompatActivity
 import com.example.myquiz.R
 import com.example.myquiz.util.Constants
-import dagger.Provides
-import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.components.ActivityComponent
 import javax.inject.Inject
 
 
