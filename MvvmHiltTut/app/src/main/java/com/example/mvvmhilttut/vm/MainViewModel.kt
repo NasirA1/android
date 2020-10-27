@@ -1,7 +1,5 @@
 package com.example.mvvmhilttut.vm
 
-
-import android.provider.SyncStateContract
 import android.util.Log
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
