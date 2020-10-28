@@ -40,7 +40,7 @@ class InMemoryQuestionRepository: QuestionRepository {
             question = "د لاندنيو څخه كومې د كمپيوټر پروگرامينگ ژبې دي؟",
             options = QuestionOptions(
                 questionOptions = listOf(
-                    QuestionOption(1, "A++"),
+                    QuestionOption(1, "++A"),
                     QuestionOption(2, "Ada"),
                     QuestionOption(3, "Linux"),
                     QuestionOption(4, "Windows"),
