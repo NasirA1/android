@@ -12,7 +12,12 @@
         tools:layout="@layout/fragment_start_quiz" >
         <action
             android:id="@+id/action_startQuizFragment_to_quizQuestionFragment"
-            app:destination="@id/quizQuestionFragment" />
+            app:destination="@id/quizQuestionFragment"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            />
     </fragment>
     <fragment
         android:id="@+id/quizQuestionFragment"
@@ -21,10 +26,20 @@
         tools:layout="@layout/fragment_quiz_question" >
         <action
             android:id="@+id/action_quizQuestionFragment_to_quizResultFragment"
-            app:destination="@id/quizResultFragment" />
+            app:destination="@id/quizResultFragment"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            />
         <action
             android:id="@+id/action_quizQuestionFragment_self"
-            app:destination="@id/quizQuestionFragment" />
+            app:destination="@id/quizQuestionFragment"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            />
     </fragment>
     <fragment
         android:id="@+id/quizResultFragment"
