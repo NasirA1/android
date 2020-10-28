@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/startFragment">
+    app:startDestination="@id/startQuizFragment">
 
     <fragment
-        android:id="@+id/startFragment"
-        android:name="com.example.myquiz.ui.fragments.StartFragment"
-        android:label="fragment_start"
-        tools:layout="@layout/fragment_start" >
+        android:id="@+id/startQuizFragment"
+        android:name="com.example.myquiz.ui.fragments.StartQuizFragment"
+        android:label="fragment_start_quiz"
+        tools:layout="@layout/fragment_start_quiz" >
         <action
-            android:id="@+id/action_startFragment_to_quizFragment"
+            android:id="@+id/action_startQuizFragment_to_quizFragment"
             app:destination="@id/quizFragment" />
     </fragment>
     <fragment
