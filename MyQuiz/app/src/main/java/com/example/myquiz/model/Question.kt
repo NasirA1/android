@@ -7,12 +7,7 @@ data class Question(
     val correctAnswers: List<Int>
 )
 
-data class QuestionOption(
-    val id: Int,
-    val description: String
-)
-
 data class QuestionOptions(
-    val questionOptions: List<QuestionOption>,
+    val questionOptions: List<String>,
     val multiChoice: Boolean
 )

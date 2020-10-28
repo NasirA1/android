@@ -76,6 +76,88 @@ class QuizTests {
             sut.getNextQuestion()
 
         assertNull(sut.getNextQuestion())
+        assertEquals(0, sut.questionsLeft())
+    }
+
+    @Test fun option_selected() = runBlocking {
+        val sut = QuizSession("dont care", questionRepository)
+
+        sut.startQuiz()
+        val question = sut.getNextQuestion()!!
+        sut.selectOption(question.id, question.options.questionOptions[0])
+        val selectedOption = sut.getSelectedOptions(question.id)
+
+        assertEquals(question.options.questionOptions[0], selectedOption[0])
+    }
+
+    @Test fun single_choice_question_always_single_optoin_selected() = runBlocking {
+        val sut = QuizSession("dont care", questionRepository)
+
+        sut.startQuiz()
+        val question = sut.getNextQuestion()!!
+        sut.selectOption(question.id, question.options.questionOptions[0])
+        sut.selectOption(question.id, question.options.questionOptions[1])
+        sut.selectOption(question.id, question.options.questionOptions[2])
+        val selectedOption = sut.getSelectedOptions(question.id)
+
+        assertEquals(1, selectedOption.size)
+        assertEquals(question.options.questionOptions[2], selectedOption[0])
+    }
+
+    @Test fun multichoice_question_multiple_optoins_can_be_selected() = runBlocking {
+        val sut = QuizSession("dont care", questionRepository)
+
+        sut.startQuiz()
+
+        var question = sut.getNextQuestion()!!
+        while(!question.options.multiChoice)
+           question = sut.getNextQuestion()!!
+
+        sut.selectOption(question.id, question.options.questionOptions[0])
+        sut.selectOption(question.id, question.options.questionOptions[1])
+        sut.selectOption(question.id, question.options.questionOptions[2])
+        val selectedOption = sut.getSelectedOptions(question.id)
+
+        assertEquals(3, selectedOption.size)
+        assertEquals(question.options.questionOptions[0], selectedOption[0])
+        assertEquals(question.options.questionOptions[1], selectedOption[1])
+        assertEquals(question.options.questionOptions[2], selectedOption[2])
+    }
+
+    @Test fun multichoice_question_optoins_can_be_unselected() = runBlocking {
+        val sut = QuizSession("dont care", questionRepository)
+
+        sut.startQuiz()
+
+        var question = sut.getNextQuestion()!!
+        while(!question.options.multiChoice)
+            question = sut.getNextQuestion()!!
+
+        sut.selectOption(question.id, question.options.questionOptions[0])
+        sut.selectOption(question.id, question.options.questionOptions[1])
+        sut.selectOption(question.id, question.options.questionOptions[2])
+        sut.unselectOption(question.id, question.options.questionOptions[1])
+        val selectedOption = sut.getSelectedOptions(question.id)
+
+        assertEquals(2, selectedOption.size)
+        assertEquals(question.options.questionOptions[0], selectedOption[0])
+        assertEquals(question.options.questionOptions[2], selectedOption[1])
+    }
+
+    @Test fun singlechoice_question_optoin_can_be_unselected() = runBlocking {
+        val sut = QuizSession("dont care", questionRepository)
+
+        sut.startQuiz()
+
+        var question = sut.getNextQuestion()!!
+        while(question.options.multiChoice)
+            question = sut.getNextQuestion()!!
+
+        sut.selectOption(question.id, question.options.questionOptions[0])
+        sut.unselectOption(question.id, question.options.questionOptions[0])
+        val selectedOption = sut.getSelectedOptions(question.id)
+
+        assertEquals(0, selectedOption.size)
     }
 
 }

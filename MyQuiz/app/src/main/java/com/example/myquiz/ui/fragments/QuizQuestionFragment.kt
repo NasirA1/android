@@ -80,10 +80,10 @@ class QuizQuestionFragment : Fragment() {
     private fun displayOptions(question: Question) {
         question.apply {
             if(options.multiChoice) {
-                options.questionOptions.forEach {
+                options.questionOptions.forEach { option ->
                     layout_options.addView(
                         CheckBox(this@QuizQuestionFragment.context).apply {
-                            text = it.description
+                            text = option
                             textSize = 24.0F
                             textDirection = View.TEXT_DIRECTION_RTL
                             setOnCheckedChangeListener { compoundButton, b ->
@@ -99,10 +99,10 @@ class QuizQuestionFragment : Fragment() {
                         ActionBar.LayoutParams.MATCH_PARENT,
                         ActionBar.LayoutParams.WRAP_CONTENT
                     )
-                    options.questionOptions.forEach {
+                    options.questionOptions.forEach { option ->
                         addView(
                             RadioButton(this@QuizQuestionFragment.context).apply {
-                                text = it.description
+                                text = option
                                 textDirection = View.TEXT_DIRECTION_RTL
                                 textSize = 22.0F
                                 layoutParams = LinearLayout.LayoutParams(

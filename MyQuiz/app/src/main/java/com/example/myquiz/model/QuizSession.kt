@@ -11,7 +11,8 @@ class QuizSession @Inject constructor(
     private val questionRepository: QuestionRepository
 ) {
     private lateinit var questionIds: List<Int>
-    private lateinit var quizQuestionIds: List<Int>
+    private lateinit var quizQuestions: List<Question>
+    private val answers = mutableMapOf<Int, MutableList<String>>()
 
     companion object {
         const val QuestionsPerQuizSession = 10
@@ -23,8 +24,8 @@ class QuizSession @Inject constructor(
 
 
     fun questionsCount(): Int =
-        if (this::quizQuestionIds.isInitialized)
-            quizQuestionIds.size
+        if (this::quizQuestions.isInitialized)
+            quizQuestions.size
         else -1
 
 
@@ -35,8 +36,8 @@ class QuizSession @Inject constructor(
             questionIds = questionRepository.getAllQuestionIds().shuffled()
             println("All questions: $questionIds")
             println("All questions count: ${questionIds.size}")
-            quizQuestionIds = questionIds.slice(0 until QuestionsPerQuizSession)
-            println("Selected questions for quiz: $quizQuestionIds")
+            quizQuestions = questionIds.slice(0 until QuestionsPerQuizSession).map { questionRepository.getQuestion(it) }
+            //println("Selected questions for quiz: $quizQuestions")
             println("Selected questions for quiz count: ${questionsCount()}")
             currentQuestionIndex = -1
         }
@@ -44,13 +45,32 @@ class QuizSession @Inject constructor(
 
     suspend fun getNextQuestion(): Question? = withContext(Dispatchers.IO) {
         currentQuestionIndex++
-        if (currentQuestionIndex < quizQuestionIds.size) {
+        if (currentQuestionIndex < quizQuestions.size) {
             println("currentQuestionIndex=$currentQuestionIndex")
-            val current = quizQuestionIds[currentQuestionIndex]
-            questionRepository.getQuestion(current)
+            quizQuestions[currentQuestionIndex]
         } else {
+            currentQuestionIndex--
             println("Quiz ended at index: currentQuestionIndex=$currentQuestionIndex")
             null
+        }
+    }
+
+    fun selectOption(questionId: Int, option: String) {
+        if(answers[questionId] == null) {
+            answers[questionId] = mutableListOf()
+        }
+        if(!quizQuestions[currentQuestionIndex].options.multiChoice) {
+            answers[questionId]!!.clear()
+        }
+        answers[questionId]!!.add(option)
+    }
+
+    fun getSelectedOptions(questionId: Int) =
+        answers[questionId] as List<String>
+
+    fun unselectOption(questionId: Int, option: String) {
+        if(answers[questionId] != null) {
+            answers[questionId]!!.remove(option)
         }
     }
 
