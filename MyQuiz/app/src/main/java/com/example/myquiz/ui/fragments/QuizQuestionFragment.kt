@@ -86,6 +86,9 @@ class QuizQuestionFragment : Fragment() {
                             text = it.description
                             textSize = 24.0F
                             textDirection = View.TEXT_DIRECTION_RTL
+                            setOnCheckedChangeListener { compoundButton, b ->
+                                Log.d(TAG, "displayOptions: ${compoundButton.text}, $b")
+                            }
                         }
                     )
                 }
@@ -106,6 +109,9 @@ class QuizQuestionFragment : Fragment() {
                                     ActionBar.LayoutParams.MATCH_PARENT,
                                     ActionBar.LayoutParams.WRAP_CONTENT
                                 )
+                                setOnCheckedChangeListener { compoundButton, b ->
+                                    Log.d(TAG, "displayOptions: ${compoundButton.text}, $b")
+                                }
                             }
                         )
                     }
