@@ -13,12 +13,13 @@ class QuizSession @Inject constructor(
     private lateinit var questionIds: List<Int>
     private lateinit var quizQuestionIds: List<Int>
 
-    var currentQuestionIndex = -1
-        private set
-
     companion object {
         const val QuestionsPerQuizSession = 10
     }
+
+
+    var currentQuestionIndex = -1
+        private set
 
 
     fun questionsCount(): Int =
@@ -30,20 +31,19 @@ class QuizSession @Inject constructor(
     fun questionsLeft() = questionsCount() - (currentQuestionIndex + 1)
 
 
-    suspend fun start() = withContext(Dispatchers.IO) {
+    suspend fun startQuiz() = withContext(Dispatchers.IO) {
         questionIds = questionRepository.getAllQuestionIds().shuffled()
         println("All questions: $questionIds")
         println("All questions count: ${questionIds.size}")
         quizQuestionIds = questionIds.slice(0 until QuestionsPerQuizSession)
         println("Selected questions for quiz: $quizQuestionIds")
         println("Selected questions for quiz count: ${quizQuestionIds.size}")
-        currentQuestionIndex = 0
     }
 
 
     suspend fun getNextQuestion(): Question? = withContext(Dispatchers.IO) {
-        if (currentQuestionIndex < quizQuestionIds.size - 1) {
-            val current = quizQuestionIds[currentQuestionIndex++]
+        if (currentQuestionIndex < quizQuestionIds.size - 2) {
+            val current = quizQuestionIds[++currentQuestionIndex]
             questionRepository.getQuestion(current)
         } else {
             null
