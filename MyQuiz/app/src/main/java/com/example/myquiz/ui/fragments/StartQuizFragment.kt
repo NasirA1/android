@@ -51,7 +51,7 @@ class StartQuizFragment : Fragment() {
         viewModel.quizStartState.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is DataState.Loading -> { Log.d(TAG, "StartQuizFragment quizStartState Loading..") }
-                is DataState.Success -> { navController.navigate(R.id.action_startQuizFragment_to_quizFragment) }
+                is DataState.Success -> { navController.navigate(R.id.action_startQuizFragment_to_quizQuestionFragment) }
                 is DataState.Error -> { Log.e(TAG, "StartQuizFragment quizStartState ERROR: ${it.ex}") }
             }
         })

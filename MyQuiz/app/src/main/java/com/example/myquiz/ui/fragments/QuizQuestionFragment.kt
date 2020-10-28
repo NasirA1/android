@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class QuizFragment : Fragment() {
+class QuizQuestionFragment : Fragment() {
 
     companion object { const val TAG = Constants.TAG }
 
@@ -31,7 +31,7 @@ class QuizFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_quiz, container, false)
+        return inflater.inflate(R.layout.fragment_quiz_question, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,20 +47,20 @@ class QuizFragment : Fragment() {
     private fun subscribeObservers() {
         viewModel.fetchQuestionState.observe(viewLifecycleOwner, Observer {
             when (it) {
-                is DataState.Loading -> { Log.d(StartQuizFragment.TAG, "QuizFragment quizStartState Loading..") }
+                is DataState.Loading -> { Log.d(StartQuizFragment.TAG, "QuizQuestionFragment quizStartState Loading..") }
                 is DataState.Success -> { onSuccessState(it) }
-                is DataState.Error -> { Log.e(StartQuizFragment.TAG, "QuizFragment quizStartState ERROR: ${it.ex}") }
+                is DataState.Error -> { Log.e(StartQuizFragment.TAG, "QuizQuestionFragment quizStartState ERROR: ${it.ex}") }
             }
         })
     }
 
     private fun onSuccessState(it: DataState.Success<Question?>) {
         if (it.data != null) {
-            Log.d(TAG, "QuizFragment: TODO display question and options")
-            Log.d(TAG, "QuizFragment: ${it.data}")
+            Log.d(TAG, "QuizQuestionFragment: TODO display question and options")
+            Log.d(TAG, "QuizQuestionFragment: ${it.data}")
         } else {
-            Log.w(TAG, "QuizFragment: quiz ended!")
-            navController.navigate(R.id.action_quizFragment_to_quizResultFragment)
+            Log.w(TAG, "QuizQuestionFragment: quiz ended!")
+            navController.navigate(R.id.action_quizQuestionFragment_to_quizResultFragment)
         }
     }
 

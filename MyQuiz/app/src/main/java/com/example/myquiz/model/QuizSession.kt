@@ -18,7 +18,7 @@ class QuizSession @Inject constructor(
     }
 
 
-    var currentQuestionIndex = -1
+    var currentQuestionIndex: Int = -1
         private set
 
 
@@ -38,14 +38,18 @@ class QuizSession @Inject constructor(
             quizQuestionIds = questionIds.slice(0 until QuestionsPerQuizSession)
             println("Selected questions for quiz: $quizQuestionIds")
             println("Selected questions for quiz count: ${quizQuestionIds.size}")
+            currentQuestionIndex = -1
         }
 
 
     suspend fun getNextQuestion(): Question? = withContext(Dispatchers.IO) {
-        if (currentQuestionIndex < quizQuestionIds.size - 2) {
-            val current = quizQuestionIds[++currentQuestionIndex]
+        currentQuestionIndex++
+        if (currentQuestionIndex < quizQuestionIds.size) {
+            println("currentQuestionIndex=$currentQuestionIndex")
+            val current = quizQuestionIds[currentQuestionIndex]
             questionRepository.getQuestion(current)
         } else {
+            println("Quiz ended at index: currentQuestionIndex=$currentQuestionIndex")
             null
         }
     }

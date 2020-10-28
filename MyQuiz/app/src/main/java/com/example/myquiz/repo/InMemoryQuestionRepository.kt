@@ -183,5 +183,5 @@ class InMemoryQuestionRepository: QuestionRepository {
 
     override suspend fun getAllQuestionIds(): List<Int> = questionsDatabase.map { it.id }
 
-    override suspend fun getQuestion(id: Int): Question = questionsDatabase[id]
+    override suspend fun getQuestion(id: Int): Question = questionsDatabase.first { it.id == id }
 }

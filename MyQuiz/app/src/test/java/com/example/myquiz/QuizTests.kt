@@ -72,7 +72,7 @@ class QuizTests {
 
         sut.startQuiz()
 
-        for(i in 0..sut.questionsCount())
+        for(i in 0 until sut.questionsCount())
             sut.getNextQuestion()
 
         assertNull(sut.getNextQuestion())
