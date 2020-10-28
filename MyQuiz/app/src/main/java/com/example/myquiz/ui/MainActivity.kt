@@ -18,8 +18,3 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 }
-
-
-class SomeClass @Inject constructor() {
-    fun doSomething() = "it works!"
-}
