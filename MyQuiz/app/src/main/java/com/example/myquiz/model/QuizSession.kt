@@ -37,7 +37,7 @@ class QuizSession @Inject constructor(
             println("All questions count: ${questionIds.size}")
             quizQuestionIds = questionIds.slice(0 until QuestionsPerQuizSession)
             println("Selected questions for quiz: $quizQuestionIds")
-            println("Selected questions for quiz count: ${quizQuestionIds.size}")
+            println("Selected questions for quiz count: ${questionsCount()}")
             currentQuestionIndex = -1
         }
 

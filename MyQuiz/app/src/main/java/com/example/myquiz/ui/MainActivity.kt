@@ -2,6 +2,7 @@ package com.example.myquiz.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -11,6 +12,7 @@ import com.example.myquiz.util.Constants
 import com.example.myquiz.util.DataState
 import com.example.myquiz.vm.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 
@@ -31,10 +33,22 @@ class MainActivity : AppCompatActivity() {
         viewModel.quizStartState.observe(this, Observer {
             when (it) {
                 is DataState.Loading -> { Log.d(TAG, "MainActivity quizStartState Loading..") }
-                is DataState.Success -> { Log.d(TAG, "MainActivity quizStartState STARTED") }
+                is DataState.Success -> { onSuccessState(it) }
                 is DataState.Error -> { Log.e(TAG, "MainActivity quizStartState ERROR: ${it.ex}") }
             }
         })
+
+        viewModel.currentQuestionState.observe(this, Observer {
+            Log.d(TAG, "subscribeObservers: progress = $it")
+            //TODO find out why the progressbar UI is not updating..
+            progress_quiz_progress.progress = it
+        })
+    }
+
+    private fun onSuccessState(dataState: DataState.Success<String>) {
+        layout_header.visibility = View.VISIBLE
+        progress_quiz_progress.max = viewModel.totalQuestions
+        textview_player_name.text = dataState.data
     }
 
 }
