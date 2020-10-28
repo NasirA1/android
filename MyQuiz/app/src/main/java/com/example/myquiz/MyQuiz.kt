@@ -8,7 +8,7 @@ import com.example.myquiz.repo.QuestionRepository
 import com.example.myquiz.util.DataState
 import javax.inject.Inject
 
-class Quiz @Inject constructor(
+class MyQuiz @Inject constructor(
     private val questionRepository: QuestionRepository
 ) {
 

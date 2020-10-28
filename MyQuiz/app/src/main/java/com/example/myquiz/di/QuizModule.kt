@@ -1,6 +1,6 @@
 package com.example.myquiz.di
 
-import com.example.myquiz.Quiz
+import com.example.myquiz.MyQuiz
 import com.example.myquiz.repo.InMemoryQuestionRepository
 import com.example.myquiz.repo.QuestionRepository
 import dagger.Module
@@ -16,7 +16,7 @@ class QuizModule {
     @Singleton
     @Provides
     fun provideQuiz(questionRepository: QuestionRepository) =
-        Quiz(questionRepository)
+        MyQuiz(questionRepository)
 
     @Singleton
     @Provides

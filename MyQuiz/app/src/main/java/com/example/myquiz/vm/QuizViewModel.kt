@@ -5,12 +5,12 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myquiz.Quiz
+import com.example.myquiz.MyQuiz
 import com.example.myquiz.util.Constants
 import kotlinx.coroutines.launch
 
 class QuizViewModel @ViewModelInject constructor(
-    private val quiz: Quiz,
+    private val quiz: MyQuiz,
     @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
