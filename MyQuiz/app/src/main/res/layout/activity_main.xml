@@ -23,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:text="د نفر نوم"
+            android:textDirection="rtl"
             android:textSize="26dp"
             android:gravity="center_horizontal"
             />
@@ -34,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:max="10"
-            android:textDirection="anyRtl"
+            android:textDirection="rtl"
             android:progress="4"/>
     </LinearLayout>
 

@@ -16,6 +16,7 @@ import com.example.myquiz.util.Constants
 import com.example.myquiz.util.DataState
 import com.example.myquiz.vm.QuizViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_quiz_question.*
 
 
 @AndroidEntryPoint
@@ -58,6 +59,7 @@ class QuizQuestionFragment : Fragment() {
         if (it.data != null) {
             Log.d(TAG, "QuizQuestionFragment: TODO display question and options")
             Log.d(TAG, "QuizQuestionFragment: ${it.data}")
+            textview_question.text = it.data.question
         } else {
             Log.w(TAG, "QuizQuestionFragment: quiz ended!")
             navController.navigate(R.id.action_quizQuestionFragment_to_quizResultFragment)
