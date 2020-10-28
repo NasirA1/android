@@ -42,6 +42,10 @@ class QuizQuestionFragment : Fragment() {
 
         subscribeObservers()
 
+        button_next_question.setOnClickListener {
+            navController.navigate(R.id.action_quizQuestionFragment_self)
+        }
+
         viewModel.fetchNextQuestion()
     }
 
