@@ -88,6 +88,7 @@ class QuizQuestionFragment : Fragment() {
                             textDirection = View.TEXT_DIRECTION_RTL
                             setOnCheckedChangeListener { compoundButton, b ->
                                 Log.d(TAG, "displayOptions: ${compoundButton.text}, $b")
+                                viewModel.setAnswerOption(compoundButton.text.toString(), b)
                             }
                         }
                     )
@@ -111,6 +112,7 @@ class QuizQuestionFragment : Fragment() {
                                 )
                                 setOnCheckedChangeListener { compoundButton, b ->
                                     Log.d(TAG, "displayOptions: ${compoundButton.text}, $b")
+                                    viewModel.setAnswerOption(compoundButton.text.toString(), b)
                                 }
                             }
                         )

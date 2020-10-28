@@ -25,4 +25,8 @@ class QuizViewModel @ViewModelInject constructor(
         }
     }
 
+    fun setAnswerOption(option: String, selected: Boolean) {
+        quiz.setAnswerOption(option, selected)
+    }
+
 }

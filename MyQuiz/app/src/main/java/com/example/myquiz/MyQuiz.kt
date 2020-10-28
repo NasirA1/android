@@ -52,4 +52,12 @@ class MyQuiz @Inject constructor(
         }
     }
 
+    fun setAnswerOption(option: String, selected: Boolean) {
+        if(selected) {
+            quizSession?.selectAnswerOption(option)
+        } else {
+            quizSession?.unselectAnswerOption(option)
+        }
+    }
+
 }

@@ -55,7 +55,14 @@ class QuizSession @Inject constructor(
         }
     }
 
-    fun selectAnswerOption(questionId: Int, option: String) {
+    fun selectAnswerOption(option: String) = selectAnswerOption(quizQuestions[currentQuestionIndex].id, option)
+
+    fun getSelectedAnswerOptions() = getSelectedAnswerOptions(quizQuestions[currentQuestionIndex].id)
+
+    fun unselectAnswerOption(option: String) = unselectAnswerOption(quizQuestions[currentQuestionIndex].id, option)
+
+
+    private fun selectAnswerOption(questionId: Int, option: String) {
         if(answers[questionId] == null) {
             answers[questionId] = mutableListOf()
         }
@@ -65,10 +72,10 @@ class QuizSession @Inject constructor(
         answers[questionId]!!.add(option)
     }
 
-    fun getSelectedAnswerOptions(questionId: Int) =
+    private fun getSelectedAnswerOptions(questionId: Int) =
         answers[questionId] as List<String>
 
-    fun unselectAnswerOption(questionId: Int, option: String) {
+    private fun unselectAnswerOption(questionId: Int, option: String) {
         if(answers[questionId] != null) {
             answers[questionId]!!.remove(option)
         }

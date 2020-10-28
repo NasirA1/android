@@ -84,8 +84,8 @@ class QuizTests {
 
         sut.startQuiz()
         val question = sut.getNextQuestion()!!
-        sut.selectAnswerOption(question.id, question.options.questionOptions[0])
-        val selectedOption = sut.getSelectedAnswerOptions(question.id)
+        sut.selectAnswerOption(question.options.questionOptions[0])
+        val selectedOption = sut.getSelectedAnswerOptions()
 
         assertEquals(question.options.questionOptions[0], selectedOption[0])
     }
@@ -95,10 +95,10 @@ class QuizTests {
 
         sut.startQuiz()
         val question = sut.getNextQuestion()!!
-        sut.selectAnswerOption(question.id, question.options.questionOptions[0])
-        sut.selectAnswerOption(question.id, question.options.questionOptions[1])
-        sut.selectAnswerOption(question.id, question.options.questionOptions[2])
-        val selectedOption = sut.getSelectedAnswerOptions(question.id)
+        sut.selectAnswerOption(question.options.questionOptions[0])
+        sut.selectAnswerOption(question.options.questionOptions[1])
+        sut.selectAnswerOption(question.options.questionOptions[2])
+        val selectedOption = sut.getSelectedAnswerOptions()
 
         assertEquals(1, selectedOption.size)
         assertEquals(question.options.questionOptions[2], selectedOption[0])
@@ -113,10 +113,10 @@ class QuizTests {
         while(!question.options.multiChoice)
            question = sut.getNextQuestion()!!
 
-        sut.selectAnswerOption(question.id, question.options.questionOptions[0])
-        sut.selectAnswerOption(question.id, question.options.questionOptions[1])
-        sut.selectAnswerOption(question.id, question.options.questionOptions[2])
-        val selectedOption = sut.getSelectedAnswerOptions(question.id)
+        sut.selectAnswerOption(question.options.questionOptions[0])
+        sut.selectAnswerOption(question.options.questionOptions[1])
+        sut.selectAnswerOption(question.options.questionOptions[2])
+        val selectedOption = sut.getSelectedAnswerOptions()
 
         assertEquals(3, selectedOption.size)
         assertEquals(question.options.questionOptions[0], selectedOption[0])
@@ -133,11 +133,11 @@ class QuizTests {
         while(!question.options.multiChoice)
             question = sut.getNextQuestion()!!
 
-        sut.selectAnswerOption(question.id, question.options.questionOptions[0])
-        sut.selectAnswerOption(question.id, question.options.questionOptions[1])
-        sut.selectAnswerOption(question.id, question.options.questionOptions[2])
-        sut.unselectAnswerOption(question.id, question.options.questionOptions[1])
-        val selectedOption = sut.getSelectedAnswerOptions(question.id)
+        sut.selectAnswerOption(question.options.questionOptions[0])
+        sut.selectAnswerOption(question.options.questionOptions[1])
+        sut.selectAnswerOption(question.options.questionOptions[2])
+        sut.unselectAnswerOption(question.options.questionOptions[1])
+        val selectedOption = sut.getSelectedAnswerOptions()
 
         assertEquals(2, selectedOption.size)
         assertEquals(question.options.questionOptions[0], selectedOption[0])
@@ -153,9 +153,9 @@ class QuizTests {
         while(question.options.multiChoice)
             question = sut.getNextQuestion()!!
 
-        sut.selectAnswerOption(question.id, question.options.questionOptions[0])
-        sut.unselectAnswerOption(question.id, question.options.questionOptions[0])
-        val selectedOption = sut.getSelectedAnswerOptions(question.id)
+        sut.selectAnswerOption(question.options.questionOptions[0])
+        sut.unselectAnswerOption(question.options.questionOptions[0])
+        val selectedOption = sut.getSelectedAnswerOptions()
 
         assertEquals(0, selectedOption.size)
     }
