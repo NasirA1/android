@@ -13,33 +13,37 @@ class QuizSession @Inject constructor(
     private lateinit var questionIds: List<Int>
     private lateinit var quizQuestionIds: List<Int>
 
-    var currentIndex = -1
+    var currentQuestionIndex = -1
         private set
 
     companion object {
         const val QuestionsPerQuizSession = 10
     }
 
-    fun questionsAvailable(): Int =
-        if(this::questionIds.isInitialized)
-            questionIds.size
-        else 0
+
+    fun questionsCount(): Int =
+        if (this::quizQuestionIds.isInitialized)
+            quizQuestionIds.size
+        else -1
+
+
+    fun questionsLeft() = questionsCount() - (currentQuestionIndex + 1)
+
 
     suspend fun start() = withContext(Dispatchers.IO) {
         questionIds = questionRepository.getAllQuestionIds().shuffled()
         println("All questions: $questionIds")
-        println("All questions count: ${questionsAvailable()}")
+        println("All questions count: ${questionIds.size}")
         quizQuestionIds = questionIds.slice(0 until QuestionsPerQuizSession)
         println("Selected questions for quiz: $quizQuestionIds")
         println("Selected questions for quiz count: ${quizQuestionIds.size}")
-        currentIndex = 0
+        currentQuestionIndex = 0
     }
 
-    fun quizQuestionCount(): Int = quizQuestionIds.size
 
     suspend fun getNextQuestion(): Question? = withContext(Dispatchers.IO) {
-        if (currentIndex < quizQuestionIds.size - 1) {
-            val current = quizQuestionIds[currentIndex++]
+        if (currentQuestionIndex < quizQuestionIds.size - 1) {
+            val current = quizQuestionIds[currentQuestionIndex++]
             questionRepository.getQuestion(current)
         } else {
             null

@@ -16,25 +16,26 @@ class QuizTests {
     fun quiz_session_initialised_with_name() {
         val sut = QuizSession("Tommy", questionRepository)
         assertEquals("Tommy", sut.playerName)
+        assertEquals(-1, sut.questionsLeft())
     }
 
     @Test fun when_quiz_session_started_questions_loaded() = runBlocking {
         val sut = QuizSession("dont care", questionRepository)
         sut.start()
-        assertTrue(sut.questionsAvailable() > 0)
-        assertTrue(sut.questionsAvailable() >= QuizSession.QuestionsPerQuizSession)
+        assertEquals(QuizSession.QuestionsPerQuizSession - 1, sut.questionsLeft())
     }
 
     @Test fun when_quiz_session_started_quiz_questions_loaded() = runBlocking {
         val sut = QuizSession("dont care", questionRepository)
         sut.start()
-        assertTrue(sut.quizQuestionCount() == QuizSession.QuestionsPerQuizSession)
+        assertTrue(sut.questionsCount() == QuizSession.QuestionsPerQuizSession)
     }
 
     @Test fun when_quiz_session_started_currentIndex_pointing_to_first_question() = runBlocking {
         val sut = QuizSession("dont care", questionRepository)
         sut.start()
-        assertEquals(0, sut.currentIndex)
+        assertEquals(0, sut.currentQuestionIndex)
+        assertEquals(QuizSession.QuestionsPerQuizSession - 1, sut.questionsLeft())
     }
 
     @Test fun when_quiz_session_started_first_question_returned() = runBlocking {
@@ -49,7 +50,7 @@ class QuizTests {
         val sut = QuizSession("dont care", questionRepository)
         sut.start()
         sut.getNextQuestion()
-        assertEquals(1, sut.currentIndex)
+        assertEquals(1, sut.currentQuestionIndex)
     }
 
 }
