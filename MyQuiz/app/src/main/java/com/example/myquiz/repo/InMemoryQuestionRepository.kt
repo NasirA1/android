@@ -6,7 +6,7 @@ import com.example.myquiz.model.QuestionOptions
 
 class InMemoryQuestionRepository: QuestionRepository {
 
-    private val questions = listOf(
+    private val questionsDatabase = listOf(
         Question(
             id = 1,
             question = "د افغانستان پخوانۍ پلازمېنه كومه ده؟",
@@ -37,7 +37,7 @@ class InMemoryQuestionRepository: QuestionRepository {
         ),
         Question(
             id = 3,
-            question = "د لاندو څخه كومې يې د كمپيوټر د پروگرامينگ ژبې دي؟",
+            question = "د لاندنيو څخه كومې د كمپيوټر پروگرامينگ ژبې دي؟",
             options = QuestionOptions(
                 questionOptions = listOf(
                     QuestionOption(1, "A++"),
@@ -52,7 +52,7 @@ class InMemoryQuestionRepository: QuestionRepository {
         ),
         Question(
             id = 4,
-            question = "د تركيې پلازمېنه څه شى ده؟",
+            question = "د تركيې پلازمېنه كومه ده؟",
             options = QuestionOptions(
                 questionOptions = listOf(
                     QuestionOption(1, "استانبول"),
@@ -66,7 +66,7 @@ class InMemoryQuestionRepository: QuestionRepository {
         ),
         Question(
             id = 5,
-            question = "د كلكولس رياضي چا كشف كړل؟",
+            question = "كلكولس چا كشف كړ؟",
             options = QuestionOptions(
                 questionOptions = listOf(
                     QuestionOption(1, "اسحق نيوټن"),
@@ -108,78 +108,80 @@ class InMemoryQuestionRepository: QuestionRepository {
         ),
         Question(
             id = 8,
-            question = "What is the capital of Afghanistan?",
+            question = "د تاو شوي 'ډي اېن اې' يوې ټوټې ته څه ويل كيږي؟",
             options = QuestionOptions(
                 questionOptions = listOf(
-                    QuestionOption(1, "Kandahar"),
-                    QuestionOption(2, "Kabul"),
-                    QuestionOption(3, "Herat"),
-                    QuestionOption(4, "Mazar"),
+                    QuestionOption(1, "كروموزوم"),
+                    QuestionOption(2, "جين"),
+                    QuestionOption(3, "حجره"),
+                    QuestionOption(4, "انساج"),
                 ),
                 multiChoice = false
             ),
-            correctAnswers = listOf(2)
+            correctAnswers = listOf(1)
         ),
         Question(
             id = 9,
-            question = "What is the capital of Afghanistan?",
+            question = "نباتات د كومې پروسې له لارې د لمر رڼا په خواړو تبديلوي؟",
             options = QuestionOptions(
                 questionOptions = listOf(
-                    QuestionOption(1, "Kandahar"),
-                    QuestionOption(2, "Kabul"),
-                    QuestionOption(3, "Herat"),
-                    QuestionOption(4, "Mazar"),
+                    QuestionOption(1, "اوكسيډايزېشن"),
+                    QuestionOption(2, "احتراق"),
+                    QuestionOption(3, "فوټوسېنتيسيز"),
+                    QuestionOption(4, "آيونايزېشن"),
                 ),
                 multiChoice = false
             ),
-            correctAnswers = listOf(2)
+            correctAnswers = listOf(3)
         ),
         Question(
             id = 10,
-            question = "What is the capital of Afghanistan?",
+            question = "كمپيوټر چا اختراع كړ؟",
             options = QuestionOptions(
                 questionOptions = listOf(
-                    QuestionOption(1, "Kandahar"),
-                    QuestionOption(2, "Kabul"),
-                    QuestionOption(3, "Herat"),
-                    QuestionOption(4, "Mazar"),
+                    QuestionOption(1, "الن ټيورينگ"),
+                    QuestionOption(2, "بيل گېټس"),
+                    QuestionOption(3, "سټيف جوبز"),
+                    QuestionOption(4, "چارلز بابېج"),
                 ),
                 multiChoice = false
             ),
-            correctAnswers = listOf(2)
+            correctAnswers = listOf(4)
         ),
         Question(
             id = 11,
-            question = "What is the capital of Afghanistan?",
+            question = "په عادي تودوخه كښې كوم فلزونه مايع بڼه لري؟",
             options = QuestionOptions(
                 questionOptions = listOf(
-                    QuestionOption(1, "Kandahar"),
-                    QuestionOption(2, "Kabul"),
-                    QuestionOption(3, "Herat"),
-                    QuestionOption(4, "Mazar"),
+                    QuestionOption(1, "وسپنه"),
+                    QuestionOption(2, "سيماب"),
+                    QuestionOption(3, "سيزيم"),
+                    QuestionOption(4, "مگنيزيم"),
+                    QuestionOption(5, "پوټاسيم"),
+                    QuestionOption(6, "ميلانين")
                 ),
-                multiChoice = false
+                multiChoice = true
             ),
-            correctAnswers = listOf(2)
+            correctAnswers = listOf(2, 3)
         ),
         Question(
             id = 12,
-            question = "What is the capital of Afghanistan?",
+            question = "څه شى د اټم د هستې پر شاوخوا څرخ وهي؟",
             options = QuestionOptions(
                 questionOptions = listOf(
-                    QuestionOption(1, "Kandahar"),
-                    QuestionOption(2, "Kabul"),
-                    QuestionOption(3, "Herat"),
-                    QuestionOption(4, "Mazar"),
+                    QuestionOption(1, "پروټون"),
+                    QuestionOption(2, "نيوټرون"),
+                    QuestionOption(3, "پازيټرون"),
+                    QuestionOption(4, "الېكټرون"),
                 ),
                 multiChoice = false
             ),
-            correctAnswers = listOf(2)
+            correctAnswers = listOf(4)
         ),
     )
 
-    override suspend fun getAllQuestionIds(): List<Int> = questions.map { it.id }
 
+    override suspend fun getAllQuestionIds(): List<Int> = questionsDatabase.map { it.id }
 
-    override suspend fun getQuestion(id: Int): Question = questions[id]
+    override suspend fun getQuestion(id: Int): Question = questionsDatabase[id]
 }
