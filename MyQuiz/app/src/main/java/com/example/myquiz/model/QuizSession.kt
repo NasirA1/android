@@ -55,7 +55,7 @@ class QuizSession @Inject constructor(
         }
     }
 
-    fun selectOption(questionId: Int, option: String) {
+    fun selectAnswerOption(questionId: Int, option: String) {
         if(answers[questionId] == null) {
             answers[questionId] = mutableListOf()
         }
@@ -65,10 +65,10 @@ class QuizSession @Inject constructor(
         answers[questionId]!!.add(option)
     }
 
-    fun getSelectedOptions(questionId: Int) =
+    fun getSelectedAnswerOptions(questionId: Int) =
         answers[questionId] as List<String>
 
-    fun unselectOption(questionId: Int, option: String) {
+    fun unselectAnswerOption(questionId: Int, option: String) {
         if(answers[questionId] != null) {
             answers[questionId]!!.remove(option)
         }
