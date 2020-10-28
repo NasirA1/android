@@ -31,6 +31,8 @@
             app:popExitAnim="@anim/slide_out_left"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/startQuizFragment"
+            app:popUpToInclusive="true"
             />
         <action
             android:id="@+id/action_quizQuestionFragment_self"
@@ -39,11 +41,13 @@
             app:popExitAnim="@anim/slide_out_left"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/startQuizFragment"
             />
     </fragment>
     <fragment
         android:id="@+id/quizResultFragment"
         android:name="com.example.myquiz.ui.fragments.QuizResultFragment"
         android:label="fragment_quiz_result"
-        tools:layout="@layout/fragment_quiz_result" />
+        tools:layout="@layout/fragment_quiz_result"
+        />
 </navigation>
