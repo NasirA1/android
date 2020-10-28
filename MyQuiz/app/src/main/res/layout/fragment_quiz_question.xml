@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.QuizQuestionFragment">
+    tools:context=".ui.fragments.QuizQuestionFragment"
+    android:textDirection="rtl"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:textDirection="rtl"
         >
         <TextView
             android:id="@+id/textview_question"
@@ -26,12 +27,8 @@
             android:orientation="vertical"
             android:layout_margin="20dp"
             >
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Option 1"
-                />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,7 +44,6 @@
                 />
         </LinearLayout>
     </RelativeLayout>
-
 
 
 </FrameLayout>

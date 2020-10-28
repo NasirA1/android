@@ -1,10 +1,16 @@
 package com.example.myquiz.ui.fragments
 
+import android.app.ActionBar
 import android.os.Bundle
+import android.text.TextDirectionHeuristic
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
+import android.widget.LinearLayout
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -64,10 +70,50 @@ class QuizQuestionFragment : Fragment() {
             Log.d(TAG, "QuizQuestionFragment: TODO display question and options")
             Log.d(TAG, "QuizQuestionFragment: ${it.data}")
             textview_question.text = it.data.question
+            displayOptions(it.data)
         } else {
             Log.w(TAG, "QuizQuestionFragment: quiz ended!")
             navController.navigate(R.id.action_quizQuestionFragment_to_quizResultFragment)
         }
+    }
+
+    private fun displayOptions(question: Question) {
+        question.apply {
+            if(options.multiChoice) {
+                options.questionOptions.forEach {
+                    layout_options.addView(
+                        CheckBox(this@QuizQuestionFragment.context).apply {
+                            text = it.description
+                            textSize = 24.0F
+                            textDirection = View.TEXT_DIRECTION_RTL
+                        }
+                    )
+                }
+            } else {
+                RadioGroup(this@QuizQuestionFragment.context).apply {
+                    textDirection = View.TEXT_DIRECTION_RTL
+                    layoutParams = LinearLayout.LayoutParams(
+                        ActionBar.LayoutParams.MATCH_PARENT,
+                        ActionBar.LayoutParams.WRAP_CONTENT
+                    )
+                    options.questionOptions.forEach {
+                        addView(
+                            RadioButton(this@QuizQuestionFragment.context).apply {
+                                text = it.description
+                                textDirection = View.TEXT_DIRECTION_RTL
+                                textSize = 22.0F
+                                layoutParams = LinearLayout.LayoutParams(
+                                    ActionBar.LayoutParams.MATCH_PARENT,
+                                    ActionBar.LayoutParams.WRAP_CONTENT
+                                )
+                            }
+                        )
+                    }
+                    layout_options.addView(this)
+                }
+            }
+        }
+
     }
 
 }
