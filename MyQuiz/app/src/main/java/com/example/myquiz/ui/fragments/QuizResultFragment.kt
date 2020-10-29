@@ -1,5 +1,6 @@
 package com.example.myquiz.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.example.myquiz.model.QuizResult
 import com.example.myquiz.util.Constants
 import com.example.myquiz.vm.QuizResultViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_quiz_result.*
 
 
 @AndroidEntryPoint
@@ -36,9 +38,13 @@ class QuizResultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view)
-        //button_start_quiz.setOnClickListener { startQuiz() }
+        button_start_another_session.setOnClickListener { startAnotherQuiz() }
 
         subscribeObservers()
+    }
+
+    private fun startAnotherQuiz() {
+        Log.d(TAG, "startAnotherQuiz: start another..")
     }
 
 
@@ -48,8 +54,11 @@ class QuizResultFragment : Fragment() {
         })
     }
 
+    @SuppressLint("SetTextI18n")
     private fun onQuizResult(quizResult: QuizResult) {
         Log.d(TAG, "onQuizResult: $quizResult")
+        textview_quiz_result.text = "${quizResult.correctAnswers}/${quizResult.totalQuestions}"
+        textview_quiz_result_percentage.text = "${quizResult.percentage()}%"
     }
 
 }

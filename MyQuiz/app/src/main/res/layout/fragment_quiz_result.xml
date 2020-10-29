@@ -13,12 +13,35 @@
         android:textDirection="rtl"
         >
         <TextView
-            android:id="@+id/textview_quiz_result"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="پايله"
             android:textSize="26dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+         />
+        <TextView
+            android:id="@+id/textview_quiz_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="شمېر"
+            android:textSize="24dp"
+         />
+        <TextView
+            android:id="@+id/textview_quiz_result_percentage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="فيصدي"
+            android:textSize="24dp"
             />
+        <Button
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_start_another_session"
+            android:text="يو ځل بيا ..."
+            android:textSize="26dp"
+        />
     </LinearLayout>
 
 </FrameLayout>
