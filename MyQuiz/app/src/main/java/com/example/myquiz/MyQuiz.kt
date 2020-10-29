@@ -72,4 +72,9 @@ class MyQuiz @Inject constructor(
     fun onLastQuestion(): Boolean =
         quizSession?.questionsLeft() == 0
 
+
+    suspend fun startAnotherSession() {
+        startQuiz(quizSession?.playerName!!)
+    }
+
 }

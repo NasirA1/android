@@ -45,6 +45,8 @@ class QuizResultFragment : Fragment() {
 
     private fun startAnotherQuiz() {
         Log.d(TAG, "startAnotherQuiz: start another..")
+        viewModel.startAnotherQuiz()
+        navController.navigate(R.id.action_quizResultFragment_to_quizQuestionFragment)
     }
 
 
