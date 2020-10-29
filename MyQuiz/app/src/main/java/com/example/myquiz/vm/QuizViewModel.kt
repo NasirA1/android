@@ -29,4 +29,6 @@ class QuizViewModel @ViewModelInject constructor(
         quiz.setAnswerOption(option, selected)
     }
 
+    fun onLastQuestion(): Boolean = quiz.onLastQuestion()
+
 }

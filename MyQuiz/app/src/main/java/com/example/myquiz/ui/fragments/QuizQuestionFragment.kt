@@ -71,6 +71,9 @@ class QuizQuestionFragment : Fragment() {
             Log.d(TAG, "QuizQuestionFragment: ${it.data}")
             textview_question.text = it.data.question
             displayOptions(it.data)
+            if(viewModel.onLastQuestion()) {
+                button_next_question.text = "پاى"
+            }
         } else {
             Log.w(TAG, "QuizQuestionFragment: quiz ended!")
             navController.navigate(R.id.action_quizQuestionFragment_to_quizResultFragment)

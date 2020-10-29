@@ -69,4 +69,7 @@ class MyQuiz @Inject constructor(
         _quizResultState.postValue(result)
     }
 
+    fun onLastQuestion(): Boolean =
+        quizSession?.questionsLeft() == 0
+
 }
