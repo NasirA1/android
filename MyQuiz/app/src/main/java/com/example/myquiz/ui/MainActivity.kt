@@ -39,15 +39,15 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.currentQuestionState.observe(this, Observer {
-            Log.d(TAG, "subscribeObservers: progress = $it")
-            //TODO find out why the progressbar UI is not updating..
+            Log.d(TAG, "subscribeObservers: progress = $it/${viewModel.totalQuestions()}")
+            progress_quiz_progress.max = viewModel.totalQuestions()
             progress_quiz_progress.progress = it
         })
     }
 
     private fun onSuccessState(dataState: DataState.Success<String>) {
         layout_header.visibility = View.VISIBLE
-        progress_quiz_progress.max = viewModel.totalQuestions
+        progress_quiz_progress.max = viewModel.totalQuestions()
         textview_player_name.text = dataState.data
     }
 

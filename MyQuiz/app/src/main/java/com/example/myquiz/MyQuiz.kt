@@ -29,7 +29,7 @@ class MyQuiz @Inject constructor(
     private var _quizResultState = MutableLiveData<QuizResult>()
     val quizResultState = _quizResultState as LiveData<QuizResult>
 
-    val totalQuestions: Int = quizSession?.questionsCount() ?: 0
+    fun totalQuestions() = quizSession?.questionsCount() ?: 0
 
     suspend fun startQuiz(playerName: String) {
         _quizStartState.value = DataState.Loading

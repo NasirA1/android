@@ -16,7 +16,7 @@ class MainViewModel @ViewModelInject constructor(
 
     val quizStartState = quiz.quizStartState
 
-    val totalQuestions = quiz.totalQuestions
+    fun totalQuestions() = quiz.totalQuestions()
 
     val currentQuestionState = quiz.currentQuestionState
 

@@ -67,7 +67,6 @@ class QuizQuestionFragment : Fragment() {
 
     private fun onSuccessState(it: DataState.Success<Question?>) {
         if (it.data != null) {
-            Log.d(TAG, "QuizQuestionFragment: TODO display question and options")
             Log.d(TAG, "QuizQuestionFragment: ${it.data}")
             textview_question.text = it.data.question
             displayOptions(it.data)
