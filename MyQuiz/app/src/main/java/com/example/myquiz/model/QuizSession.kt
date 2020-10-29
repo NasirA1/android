@@ -61,8 +61,15 @@ class QuizSession @Inject constructor(
     fun getResult(): QuizResult = QuizResult(
         totalQuestions = questionsCount(),
         correctAnswers = run {
-            //answers.filter { quizQuestions[it.key].correctAnswers.contains(it.value) }
-            0
+            var count = 0
+            answers.forEach {
+                val questionId = it.key
+                val answers = it.value.sorted()
+                val question = quizQuestions.first { q -> questionId == q.id }
+                val correctAnswers = question.correctAnswers.map { id -> question.options.questionOptions[id] }.sorted()
+                if(answers == correctAnswers) count++
+            }
+            count
         })
 
     fun selectAnswerOption(option: String) =
