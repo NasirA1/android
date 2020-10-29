@@ -13,7 +13,7 @@ class InMemoryQuestionRepository: QuestionRepository {
                 questionOptions = listOf("هرات", "كندهار", "كابل", "مزار"),
                 multiChoice = false
             ),
-            correctAnswers = listOf(2)
+            correctAnswers = listOf(1)
         ),
         Question(
             id = 2,
@@ -22,7 +22,7 @@ class InMemoryQuestionRepository: QuestionRepository {
                 questionOptions = listOf("كاناډا", "امريكا", "چين", "روسيه"),
                 multiChoice = false
             ),
-            correctAnswers = listOf(4)
+            correctAnswers = listOf(3)
         ),
         Question(
             id = 3,
@@ -31,7 +31,7 @@ class InMemoryQuestionRepository: QuestionRepository {
                 questionOptions = listOf("++A", "Ada", "Linux", "Windows", "Ruby"),
                 multiChoice = true
             ),
-            correctAnswers = listOf(2, 5)
+            correctAnswers = listOf(1, 4)
         ),
         Question(
             id = 4,
@@ -40,7 +40,7 @@ class InMemoryQuestionRepository: QuestionRepository {
                 questionOptions = listOf("استانبول", "قونيه", "انقره", "تهران"),
                 multiChoice = false
             ),
-            correctAnswers = listOf(3)
+            correctAnswers = listOf(2)
         ),
         Question(
             id = 5,
@@ -49,7 +49,7 @@ class InMemoryQuestionRepository: QuestionRepository {
                 questionOptions = listOf("اسحق نيوټن", "البرټ آينشټاين", "محمد الخوارزمي", "لايبنيڅ"),
                 multiChoice = true
             ),
-            correctAnswers = listOf(1, 4)
+            correctAnswers = listOf(0, 3)
         ),
         Question(
             id = 6,
@@ -58,7 +58,7 @@ class InMemoryQuestionRepository: QuestionRepository {
                 questionOptions = listOf("اته رڼايي ثانيې", "اته رڼايي دقيقې", "اتيا رڼايي ثانيې", "يونيم ميليون كيلومتره"),
                 multiChoice = false
             ),
-            correctAnswers = listOf(2)
+            correctAnswers = listOf(0)
         ),
         Question(
             id = 7,
@@ -72,7 +72,7 @@ class InMemoryQuestionRepository: QuestionRepository {
                 ),
                 multiChoice = false
             ),
-            correctAnswers = listOf(1)
+            correctAnswers = listOf(0)
         ),
         Question(
             id = 8,
@@ -81,7 +81,7 @@ class InMemoryQuestionRepository: QuestionRepository {
                 questionOptions = listOf("كروموزوم", "جين", "حجره", "انساج"),
                 multiChoice = false
             ),
-            correctAnswers = listOf(1)
+            correctAnswers = listOf(0)
         ),
         Question(
             id = 9,
@@ -90,7 +90,7 @@ class InMemoryQuestionRepository: QuestionRepository {
                 questionOptions = listOf("اوكسيډايزېشن", "احتراق", "فوټوسېنتيسيز", "آيونايزېشن"),
                 multiChoice = false
             ),
-            correctAnswers = listOf(3)
+            correctAnswers = listOf(2)
         ),
         Question(
             id = 10,
@@ -99,7 +99,7 @@ class InMemoryQuestionRepository: QuestionRepository {
                 questionOptions = listOf("الن ټيورينگ", "بيل گېټس", "سټيف جوبز", "چارلز بابېج"),
                 multiChoice = false
             ),
-            correctAnswers = listOf(4)
+            correctAnswers = listOf(3)
         ),
         Question(
             id = 11,
@@ -108,7 +108,7 @@ class InMemoryQuestionRepository: QuestionRepository {
                 questionOptions = listOf("وسپنه", "سيماب", "سيزيم", "مگنيزيم", "پوټاسيم", "ميلانين"),
                 multiChoice = true
             ),
-            correctAnswers = listOf(2, 3)
+            correctAnswers = listOf(1, 2)
         ),
         Question(
             id = 12,
@@ -117,7 +117,7 @@ class InMemoryQuestionRepository: QuestionRepository {
                 questionOptions = listOf("پروټون", "نيوټرون", "پازيټرون", "الېكټرون"),
                 multiChoice = false
             ),
-            correctAnswers = listOf(4)
+            correctAnswers = listOf(3)
         ),
     )
 

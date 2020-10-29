@@ -3,6 +3,8 @@ package com.example.myquiz
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.myquiz.model.Question
+import com.example.myquiz.model.QuizResult
+import com.example.myquiz.model.QuizResultListener
 import com.example.myquiz.model.QuizSession
 import com.example.myquiz.repo.QuestionRepository
 import com.example.myquiz.util.DataState
@@ -11,7 +13,7 @@ import javax.inject.Inject
 
 class MyQuiz @Inject constructor(
     private val questionRepository: QuestionRepository
-) {
+): QuizResultListener {
 
     private var quizSession: QuizSession? = null
 
@@ -24,12 +26,15 @@ class MyQuiz @Inject constructor(
     private var _currentQuestionState = MutableLiveData<Int>()
     val currentQuestionState = _currentQuestionState as LiveData<Int>
 
+    private var _quizResultState = MutableLiveData<QuizResult>()
+    val quizResultState = _quizResultState as LiveData<QuizResult>
+
     val totalQuestions: Int = quizSession?.questionsCount() ?: 0
 
     suspend fun startQuiz(playerName: String) {
         _quizStartState.value = DataState.Loading
         try {
-            quizSession = QuizSession(playerName, questionRepository)
+            quizSession = QuizSession(playerName, questionRepository, this)
             quizSession?.startQuiz()
             _currentQuestionState.value = 0
             _quizStartState.value = DataState.Success(playerName)
@@ -58,6 +63,10 @@ class MyQuiz @Inject constructor(
         } else {
             quizSession?.unselectAnswerOption(option)
         }
+    }
+
+    override fun quizSessionEnded(result: QuizResult) {
+        _quizResultState.postValue(result)
     }
 
 }

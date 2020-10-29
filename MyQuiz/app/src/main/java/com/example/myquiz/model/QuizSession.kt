@@ -8,7 +8,8 @@ import javax.inject.Inject
 
 class QuizSession @Inject constructor(
     val playerName: String,
-    private val questionRepository: QuestionRepository
+    private val questionRepository: QuestionRepository,
+    private val quizResultListener: QuizResultListener
 ) {
     private lateinit var questionIds: List<Int>
     private lateinit var quizQuestions: List<Question>
@@ -33,14 +34,15 @@ class QuizSession @Inject constructor(
 
 
     suspend fun startQuiz() = withContext(Dispatchers.IO) {
-            questionIds = questionRepository.getAllQuestionIds().shuffled()
-            println("All questions: $questionIds")
-            println("All questions count: ${questionIds.size}")
-            quizQuestions = questionIds.slice(0 until QuestionsPerQuizSession).map { questionRepository.getQuestion(it) }
-            //println("Selected questions for quiz: $quizQuestions")
-            println("Selected questions for quiz count: ${questionsCount()}")
-            currentQuestionIndex = -1
-        }
+        questionIds = questionRepository.getAllQuestionIds().shuffled()
+        println("All questions: $questionIds")
+        println("All questions count: ${questionIds.size}")
+        quizQuestions = questionIds.slice(0 until QuestionsPerQuizSession)
+            .map { questionRepository.getQuestion(it) }
+        //println("Selected questions for quiz: $quizQuestions")
+        println("Selected questions for quiz count: ${questionsCount()}")
+        currentQuestionIndex = -1
+    }
 
 
     suspend fun getNextQuestion(): Question? = withContext(Dispatchers.IO) {
@@ -51,22 +53,32 @@ class QuizSession @Inject constructor(
         } else {
             currentQuestionIndex--
             println("Quiz ended at index: currentQuestionIndex=$currentQuestionIndex")
+            quizResultListener.quizSessionEnded(getResult())
             null
         }
     }
 
-    fun selectAnswerOption(option: String) = selectAnswerOption(quizQuestions[currentQuestionIndex].id, option)
+    fun getResult(): QuizResult = QuizResult(
+        totalQuestions = questionsCount(),
+        correctAnswers = run {
+            //answers.filter { quizQuestions[it.key].correctAnswers.contains(it.value) }
+            0
+        })
 
-    fun getSelectedAnswerOptions() = getSelectedAnswerOptions(quizQuestions[currentQuestionIndex].id)
+    fun selectAnswerOption(option: String) =
+        selectAnswerOption(quizQuestions[currentQuestionIndex].id, option)
 
-    fun unselectAnswerOption(option: String) = unselectAnswerOption(quizQuestions[currentQuestionIndex].id, option)
+    fun getSelectedAnswerOptions() =
+        getSelectedAnswerOptions(quizQuestions[currentQuestionIndex].id)
 
+    fun unselectAnswerOption(option: String) =
+        unselectAnswerOption(quizQuestions[currentQuestionIndex].id, option)
 
     private fun selectAnswerOption(questionId: Int, option: String) {
-        if(answers[questionId] == null) {
+        if (answers[questionId] == null) {
             answers[questionId] = mutableListOf()
         }
-        if(!quizQuestions[currentQuestionIndex].options.multiChoice) {
+        if (!quizQuestions[currentQuestionIndex].options.multiChoice) {
             answers[questionId]!!.clear()
         }
         answers[questionId]!!.add(option)
@@ -76,9 +88,9 @@ class QuizSession @Inject constructor(
         answers[questionId] as List<String>
 
     private fun unselectAnswerOption(questionId: Int, option: String) {
-        if(answers[questionId] != null) {
+        if (answers[questionId] != null) {
             answers[questionId]!!.remove(option)
         }
     }
-
 }
+
