@@ -26,14 +26,9 @@
             android:layout_height="match_parent"
             android:text="شمېر"
             android:textSize="24dp"
+            android:textDirection="ltr"
+            android:gravity="right"
          />
-        <TextView
-            android:id="@+id/textview_quiz_result_percentage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="فيصدي"
-            android:textSize="24dp"
-            />
         <Button
             android:layout_marginTop="50dp"
             android:layout_width="match_parent"

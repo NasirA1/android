@@ -59,8 +59,7 @@ class QuizResultFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun onQuizResult(quizResult: QuizResult) {
         Log.d(TAG, "onQuizResult: $quizResult")
-        textview_quiz_result.text = "${quizResult.correctAnswers}/${quizResult.totalQuestions}"
-        textview_quiz_result_percentage.text = "${quizResult.percentage()}%"
+        textview_quiz_result.text = "${quizResult.correctAnswers}/${quizResult.totalQuestions} (${quizResult.percentage().toInt()}%)"
     }
 
 }
