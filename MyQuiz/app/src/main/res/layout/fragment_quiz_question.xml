@@ -6,7 +6,6 @@
     tools:context=".ui.fragments.QuizQuestionFragment"
     android:textDirection="rtl"
     >
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,14 +34,15 @@
             android:layout_below="@id/layout_options"
             android:layout_margin="20dp"
             >
-            <Button
-                android:id="@+id/button_next_question"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="بله پوښتنه"
-                android:textSize="24dp"
-                />
         </LinearLayout>
+        <Button
+            android:id="@+id/button_next_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="بله پوښتنه"
+            android:textSize="24dp"
+            />
     </RelativeLayout>
 
 
